@@ -4,8 +4,9 @@ email address : didalgus@gmail.com
 blog address : https://didalgus.github.io/
 
 ## Introduction
-Board REST Service 개발  
-restful API 방식으로 게시물을 생성, 삭제한다.
+Board REST Service  
+restful API 방식으로 게시물을 조회하고 생성, 삭제합니다.  
+API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확인할 수 있습니다. 
 
 ## Development Tools
 - Apple MacBook M1 Pro (Ventura 13.3.1)
@@ -19,7 +20,7 @@ restful API 방식으로 게시물을 생성, 삭제한다.
 ## Application Version
 - SpringBoot 2.7.13 (SpringFramework 5.3.27)
 - Swagger3 (http://localhost:8080/swagger-ui/index.html)
-- MyBais 3.5.7
+- MyBatis 3.5.7
 
 # Docker 
 
@@ -57,12 +58,7 @@ $ tail -f ~/logs/spring.log
 ```
 
 ## APIs 
-- 글 조회 : http://localhost:8080/board/1/content
-- 글 입력 
-- 글 삭제
-- 글 목록 
-
-## View
-- 글 입력 화면 
-- 글 목록 화면 
+- 글 조회 : GET http://localhost:8080/board/{seq}
+- 글 입력 : POST http://localhost:8080/board/reg
+- 글 목록 : GET http://localhost:8080/board/list 
 
