@@ -9,6 +9,8 @@ import org.example.dto.BoardResponse;
 import org.example.service.BoardService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -22,13 +24,13 @@ public class BoardRestController {
 
     @ApiOperation("게시물 조회")
     @GetMapping("/board/{boardSeq}")
-    public BoardResponse getBoardBySeq(@PathVariable Long boardSeq) {
+    public BoardResponse getBoardBySeq(@PathVariable @Valid @NotNull Long boardSeq) {
         return BoardResponse.of(boardService.getBoardBySeq(boardSeq));
     }
 
     @ApiOperation("게시물 등록")
     @PostMapping("/board/reg")
-    public String regBoard(BoardRegRequest boardRegRequest) {
+    public String regBoard(@Valid BoardRegRequest boardRegRequest) {
         return boardService.regBoard(boardRegRequest);
     }
 

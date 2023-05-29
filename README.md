@@ -8,6 +8,8 @@ Board REST Service
 restful API 방식으로 게시물을 조회하고 생성, 삭제합니다.  
 API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확인할 수 있습니다. 
 
+추후, User 가입&로그인, 게시판 File Upload 기능 추가예정입니다. (작성일 : 2023-05-29)
+
 ## Development Tools
 - Apple MacBook M1 Pro (Ventura 13.3.1)
 - IntelliJ IDEA 2023.1.2  
