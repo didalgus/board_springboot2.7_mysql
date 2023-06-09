@@ -17,6 +17,11 @@ public interface BoardMapper {
     @Insert("INSERT INTO board (title, content, reg_name) VALUES (#{title}, #{content}, #{regName})")
     int insertBoard(BoardRegRequest boardRegRequest);
 
-    @Select("SELECT seq, title, content, reg_name, reg_dt FROM board")
-    List<BoardEntity> selectBoardList();
+    @Select({"<script>",
+            "SELECT seq, title, content, reg_type, reg_name, reg_dt FROM board",
+            "<where>",
+            "<if test='title != null'> title LIKE CONCAT('%', #{title}, '%')</if>",
+            "</where>",
+            "</script>"})
+    List<BoardEntity> selectBoardList(String title);
 }

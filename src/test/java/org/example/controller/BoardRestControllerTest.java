@@ -57,7 +57,7 @@ class BoardRestControllerTest {
     @DisplayName("게시물 목록 조회")
     @Test
     void getBoardListTest() throws Exception {
-        when(boardService.getBoardList())
+        when(boardService.getBoardList(null))
                 .thenReturn(Collections.singletonList(getBoardEntity()));
 
         mockMvc.perform(get("/board/list")
@@ -66,6 +66,20 @@ class BoardRestControllerTest {
                         .andDo(print());
 
     }
+
+    @DisplayName("게시물 목록 조회 - 조건 검색")
+    @Test
+    void getBoardListByTitleTest() throws Exception {
+        when(boardService.getBoardList("Dooly"))
+                .thenReturn(Collections.singletonList(getBoardEntity()));
+
+        mockMvc.perform(get("/board/list?title=Dooly")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+    }
+
 
     @DisplayName("게시물 등록")
     @Test

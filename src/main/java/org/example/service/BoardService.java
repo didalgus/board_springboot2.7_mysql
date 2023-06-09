@@ -24,7 +24,7 @@ public class BoardService {
         return (boardMapper.insertBoard(boardRegRequest) == 1) ? "OK" : "Fail";
     }
 
-    public List<BoardEntity> getBoardList() {
-        return boardMapper.selectBoardList();
+    public List<BoardEntity> getBoardList(String title) {
+        return boardMapper.selectBoardList(title);
     }
 }

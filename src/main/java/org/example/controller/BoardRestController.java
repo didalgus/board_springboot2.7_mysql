@@ -36,8 +36,8 @@ public class BoardRestController {
 
     @ApiOperation("게시물 목록 조회")
     @GetMapping("/board/list")
-    public List<BoardResponse> getBoardList() {
-        return BoardResponse.listOf(boardService.getBoardList());
+    public List<BoardResponse> getBoardList(@RequestParam(value = "title", required = false) String title) {
+        return BoardResponse.listOf(boardService.getBoardList(title));
     }
 
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
@@ -39,10 +41,31 @@ class BoardServiceTest {
     @Test
     void getBoardListTest() {
 
-        List<BoardEntity> boardEntities = boardService.getBoardList();
+        String title = null;
+        List<BoardEntity> boardEntities = boardService.getBoardList(title);
 
         log.info("list count :  {}", boardEntities.size());
         assertTrue(boardEntities.size() > 0);
+    }
+
+    @DisplayName("게시물 목록 조회- 조건")
+    @Test
+    void getBoardListParamTest() {
+
+        String title = "title";
+        List<BoardEntity> boardEntities = boardService.getBoardList(title);
+
+        log.info("list count :  {}", boardEntities.size());
+        assertTrue(boardEntities.size() > 0);
+
+
+        boardEntities.stream().forEach(v-> System.out.println(v.getTitle()));
+
+        List<BoardEntity> filterEntities = boardEntities.stream().filter(v -> v.getTitle().indexOf(title) >= 0).collect(Collectors.toList());
+        log.info("filter count :  {}", filterEntities.size());
+
+        assertEquals(boardEntities.size(), filterEntities.size());
+
     }
 
     @DisplayName("게시물 등록")

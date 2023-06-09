@@ -32,12 +32,12 @@ https://docs.docker.com/desktop/install/mac-install/
 소스내 `docker` 디렉토리로 이동 후 아래 명령어로 compose 구동합니다.  
 -d 옵션은 background 구동합니다. 
 
-```
+```bash
 docker-compose up -d 
 ```
 
 compose 중지는 아래 명령로 실행합니다.
-```
+```bash
 docker-compose down
 ```
 
@@ -48,14 +48,14 @@ platform: linux/amd64
 ```
 
 MySQL 컨테이너 접속 CLI 명령어  
-```
+```bash
 docker exec -it mysql_5_7 bash
 ```
 참고 Url https://github.com/docker-library/docs/tree/master/mysql
 
 
 ## Logs  
-```
+```bash
 $ tail -f ~/logs/spring.log
 ```
 
