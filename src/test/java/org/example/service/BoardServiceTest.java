@@ -58,14 +58,11 @@ class BoardServiceTest {
         log.info("list count :  {}", boardEntities.size());
         assertTrue(boardEntities.size() > 0);
 
-
-        boardEntities.stream().forEach(v-> System.out.println(v.getTitle()));
-
+        //boardEntities.stream().forEach(v-> System.out.println(v.getTitle()));
         List<BoardEntity> filterEntities = boardEntities.stream().filter(v -> v.getTitle().indexOf(title) >= 0).collect(Collectors.toList());
+
         log.info("filter count :  {}", filterEntities.size());
-
         assertEquals(boardEntities.size(), filterEntities.size());
-
     }
 
     @DisplayName("게시물 등록")

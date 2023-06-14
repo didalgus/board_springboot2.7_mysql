@@ -15,7 +15,7 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 - IntelliJ IDEA 2023.1.2  
 
 ## Development Environment
-- JAVA 11
+- JAVA 17
 - MySQL 5.7 
 - Docker 23.0.5 (Docker Desktop 4.19.0)
 

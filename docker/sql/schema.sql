@@ -15,3 +15,13 @@ CREATE TABLE board (
   reg_dt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT '등록일시',
   PRIMARY KEY (seq)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='게시판';
+
+DROP TABLE if EXISTS user;
+CREATE TABLE user (
+    seq bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '일련번호',
+    id varchar(50) NOT NULL COMMENT '아이디',
+    name varchar(50) NOT NULL COMMENT '이름',
+    password varchar(80) NOT NULL COMMENT '비밀번호',
+    create_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT '생성일시',
+    PRIMARY KEY (seq)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자';

@@ -6,11 +6,13 @@ plugins {
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
 }
+
+ext['spring-security.version'] = '5.8.3'
 
 dependencies {
 
@@ -30,6 +32,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'net.sf.ehcache:ehcache:2.10.9.2'
 
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.1'         // layout-decorate 추가
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
 
     // swagger3
     implementation 'io.springfox:springfox-boot-starter:3.0.0'

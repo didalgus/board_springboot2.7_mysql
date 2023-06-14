@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      data-layout-decorate="~{layout/layout}">
+
+<div layout:fragment="content">
+
+    <div class="container">
+        <form  id="loginForm" class="form-signin" method="post"action="/login" enctype="multipart/form-data">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <p>
+                <label for="usernid" class="sr-only">UsernID</label>
+                <input type="text" id="usernid" name="usernid" class="form-control" placeholder="User ID" required autofocus> 2자 이상 입력하세요.
+            </p>
+            <p>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required> 1자 이상 입력하세요.
+            </p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            테스트용 계정 : test / 1234
+        </form>
+    </div>
+
+</div>
+</html>
+
+<script>
+    $("#loginForm").on("submit", function(event) {
+
+        // Stop form from submitting normally
+        event.preventDefault();
+
+        // Get some values from elements on the page
+        let $form = $( this ),
+            url = $form.attr("action"),
+            formData = {
+                memberId: $("#memberId").val(),
+                memberPassword: $("#memberPassword").val()
+            };
+
+        let posting = $.post(url, formData);
+
+        posting.done(function(data) {
+            console.log(data)
+
+            if(data == "OK") {
+                alert("로그인 성공하였습니다.");
+                location.replace("/");
+            } else {
+                alert(data);
+            }
+
+        }).fail(function (data) {
+
+            if(data.status == 404){
+                alert("페이지가 존재하지 않습니다");
+            }else if(data.status == 500) {
+                alert("서버에러");
+            }else {
+                if(data.responseJSON.length > 0) {
+                    for(let i in data.responseJSON) {
+                        console.log(data.responseJSON[i]);
+                        alert(data.responseJSON[i]);
+                    }
+                }
+            }
+
+        });
+    });
+</script>

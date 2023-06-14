@@ -1,0 +1,16 @@
+### 게시판 목록 조회
+GET /board/list
+Host: localhost:8080
+Content-Type: application/json
+
+### 사용자 등록
+POST /user/join HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "id" : "test",
+  "name" : "tname",
+  "userPassword" : "1234",
+  "authority": "ROLE_USER"
+}
