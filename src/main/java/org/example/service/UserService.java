@@ -15,14 +15,13 @@ public class UserService {
 
     public String create(UserJoinRequest userJoinRequest) {
 
-         userJoinRequest.setUserPassword(passwordEncoder.encode(userJoinRequest.getUserPassword()));
+         //userJoinRequest.setUserPassword(passwordEncoder.encode(userJoinRequest.getUserPassword()));
 
         if (userMapper.createUser(userJoinRequest) == 1) {
             return "OK";
         } else {
             return "FAIL";
         }
-
 
     }
 }

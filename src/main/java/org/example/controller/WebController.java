@@ -8,8 +8,23 @@ public class WebController {
 
 
     @GetMapping("/")
-    public String getLoignForm() {
+    public String index() {
         return "/index";
+    }
+
+    @GetMapping("/board")
+    public String board() {
+        return "/board";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "/admin";
+    }
+
+    @GetMapping("/project")
+    public String project() {
+        return "/project";
     }
 
 //    @GetMapping("/login")
@@ -21,5 +36,9 @@ public class WebController {
 //    public String getJoinForm() {
 //        return "/join/form";
 //    }
+
+
+
+
 
 }

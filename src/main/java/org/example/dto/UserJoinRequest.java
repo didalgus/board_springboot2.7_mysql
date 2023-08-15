@@ -1,15 +1,13 @@
 package org.example.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
+@Builder
 public class UserJoinRequest {
 
     @NotNull(message = "User Id : Please enter your id")
@@ -22,4 +20,8 @@ public class UserJoinRequest {
 
     @NotBlank(message = "User Password : Please enter your password")
     private String userPassword;
+
+    @NotBlank(message = "User Authority : Please select a permission")
+    private String userAuthority;
+
 }

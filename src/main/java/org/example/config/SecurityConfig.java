@@ -6,9 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -19,15 +23,23 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests()
-                .requestMatchers("/board/**").hasAnyAuthority("ROLE_MEMBER")
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+//                .requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MEMBER")
+                .requestMatchers("/project/**").authenticated()
+                .requestMatchers("/user/**").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
                 .anyRequest().permitAll();
 
         http.headers()
                 .defaultsDisabled()
                 .frameOptions().sameOrigin()
-                .cacheControl().disable();
+                .cacheControl().disable()
+                .xssProtection().headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK);
 
-        http.csrf();
+        http.csrf().disable();      // Post 전송시 csrf 항목 추가해주지 않는경우 disable()  해줘야 함.
+        // Cross Site Request Fogery: 사이트간 요청 위조
+
+        http.sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true);
 
         http.formLogin();
 //                .loginProcessingUrl("/login/process")
@@ -41,6 +53,66 @@ public class SecurityConfig {
 
         return http.build();
 
+/*
+        return http
+            .authorizeHttpRequests()
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/private-project/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MEMBER")
+                .requestMatchers("/project/**").authenticated()
+                .anyRequest().permitAll()
+                .and()
+            .requiresChannel()
+                .requestMatchers("/admin/**").requiresSecure()
+                .requestMatchers("/private-project/**").requiresSecure()
+                .requestMatchers("/project/**").requiresSecure()
+                .anyRequest().requiresInsecure()
+                .and()
+            .formLogin()
+                .and()
+            .logout()
+                .and()
+            .headers()
+                .defaultsDisabled()
+                .cacheControl()
+                    .and()
+                .contentTypeOptions()
+                    .and()
+                .xssProtection()
+                    .headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
+                    .and()
+                .frameOptions()
+                    .sameOrigin()
+                .and()
+            .csrf()
+                .disable()
+            .sessionManagement()
+                .maximumSessions(1)
+                    .maxSessionsPreventsLogin(true)
+                    .and()
+                .and()
+            .build();
+*/
+    }
+
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsManager() {
+        UserDetails admin = User.withUsername("admin")
+                .password("{noop}admin")
+                .authorities("ROLE_ADMIN")
+                .build();
+
+        UserDetails member = User.withUsername("member")
+                .password("{noop}member")
+                .authorities("ROLE_MEMBER")
+                .build();
+
+        UserDetails guest = User.withUsername("guest")
+                .password("{noop}guest")
+                .authorities("ROLE_GUEST")
+                .build();
+
+        return new InMemoryUserDetailsManager(admin, member, guest);
     }
 
     @Bean

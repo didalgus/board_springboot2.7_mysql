@@ -2,6 +2,7 @@ package org.example.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
+import lombok.Data;
 import org.example.enums.RegType;
 
 import javax.validation.constraints.NotEmpty;

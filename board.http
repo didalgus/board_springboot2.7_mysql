@@ -3,14 +3,26 @@ GET /board/list
 Host: localhost:8080
 Content-Type: application/json
 
-### 사용자 등록
-POST /user/join HTTP/1.1
+### 게시판 등록
+POST /board/reg HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 
 {
-  "id" : "test",
-  "name" : "tname",
+  "title" : "title{{$randomInt}}",
+  "content" : "{{$random.alphanumeric(10)}}",
+  "regType" : "User",
+  "regName" : "name{{$random.alphabetic(3)}}"
+}
+
+### 사용자 등록
+POST /user/create HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "userId" : "id{{$randomInt}}",
+  "userName" : "name{{$random.alphabetic(3)}}",
   "userPassword" : "1234",
-  "authority": "ROLE_USER"
+  "userAuthority": "ROLE_USER"
 }

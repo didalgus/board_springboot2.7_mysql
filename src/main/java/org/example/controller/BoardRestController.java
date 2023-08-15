@@ -29,8 +29,8 @@ public class BoardRestController {
     }
 
     @ApiOperation("게시물 등록")
-    @PostMapping("/board/reg")
-    public String regBoard(@Valid BoardRegRequest boardRegRequest) {
+    @PostMapping("/board/create")
+    public String regBoard(@RequestBody @Valid BoardRegRequest boardRegRequest) {
         return boardService.regBoard(boardRegRequest);
     }
 

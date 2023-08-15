@@ -1,6 +1,7 @@
 # Board
 
 email address : didalgus@gmail.com  
+repository : https://github.com/didalgus/board_springboot2.7_mysql
 blog address : https://didalgus.github.io/
 
 ## Introduction

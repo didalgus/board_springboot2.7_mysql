@@ -7,7 +7,7 @@ import org.example.dto.UserJoinRequest;
 @Mapper
 public interface UserMapper {
 
-    @Insert("INSERT INTO user (id, name, password) VALUES (#{userId}, #{userName}, #{userPassword})")
+    @Insert("INSERT INTO user (id, name, password, authority) VALUES (#{userId}, #{userName}, #{userPassword}, #{userAuthority})")
     int createUser(UserJoinRequest userJoinRequest);
 
 }
