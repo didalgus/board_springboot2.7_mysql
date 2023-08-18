@@ -1,3 +1,9 @@
+--
+-- mysql> CREATE USER demo@'127.0.0.1' IDENTIFIED BY 'dem0Passw*rd'; -- 계정 생성
+-- mysql> GRANT SELECT, INSERT, UPDATE, DELETE, DROP, ALTER ON demo.* TO demo@'127.0.0.1' WITH GRANT OPTION; -- 권한 생성
+-- mysql> FLUSH PRIVILEGES;
+--
+
 DROP DATABASE IF EXISTS demo;
 CREATE DATABASE demo DEFAULT CHARSET utf8;
 

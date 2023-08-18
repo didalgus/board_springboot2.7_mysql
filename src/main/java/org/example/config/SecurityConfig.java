@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 //                .requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MEMBER")
                 .requestMatchers("/project/**").authenticated()
+                .requestMatchers("/board/**").permitAll()
                 .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .anyRequest().permitAll();

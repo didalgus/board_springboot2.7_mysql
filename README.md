@@ -19,6 +19,7 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 - JAVA 17
 - MySQL 5.7 
 - Docker 23.0.5 (Docker Desktop 4.19.0)
+- IntelliJ IDEA 2023.2 
 
 ## Application Version
 - SpringBoot 2.7.13 (SpringFramework 5.3.27)
@@ -60,8 +61,30 @@ docker exec -it mysql_5_7 bash
 $ tail -f ~/logs/spring.log
 ```
 
+## IntelliJ http 
+IntelliJ IDEA 2023.2 버전 [Dynamic variables](https://www.jetbrains.com/help/idea/2023.2/exploring-http-syntax.html#dynamic-variables) 구문을 사용하였습니다.  
+
+ex)
+* $random.alphabetic(length): generates a sequence of uppercase and lowercase letters of length length (must be greater than 0). 
+* $random.alphanumeric(length): generates a sequence of uppercase and lowercase letters, digits, and underscores of length length (must be greater than 0). 
+
+sample  
+```
+### 게시판 등록
+POST /board/create HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "title" : "title{{$randomInt}}",
+  "content" : "{{$random.alphanumeric(10)}}",
+  "regType" : "User",
+  "regName" : "name{{$random.alphabetic(3)}}"
+}
+```
+
 ## APIs 
 - 글 조회 : GET http://localhost:8080/board/{seq}
-- 글 입력 : POST http://localhost:8080/board/reg
+- 글 입력 : POST http://localhost:8080/board/create
 - 글 목록 : GET http://localhost:8080/board/list 
 
