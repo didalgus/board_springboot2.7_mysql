@@ -23,7 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername (String username) throws UsernameNotFoundException {
 
-        UserEntity user = userMapper.selectByUserId(username);
+        UserEntity user = userMapper.selectByUserId(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
 
         return new User(user.getId(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(user.getAuthority())));
     }
