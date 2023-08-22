@@ -3,6 +3,7 @@ package org.example.service;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.UserJoinRequest;
 import org.example.dto.UserLoginRequest;
+import org.example.entity.UserEntity;
 import org.example.mapper.UserMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public void login(UserLoginRequest userLoginRequest) {
-        userMapper.selectUser(userLoginRequest);
+    public UserEntity login(UserLoginRequest userLoginRequest) {
+        return userMapper.selectUser(userLoginRequest);
     }
 
 
