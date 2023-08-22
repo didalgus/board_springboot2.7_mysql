@@ -2,13 +2,16 @@ package org.example.config;
 
 import org.example.common.Sha256PasswordEncoder;
 import org.example.handler.CustomLoginSuccessHandler;
+import org.example.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,7 +27,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests()
                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-//                .requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MEMBER")
+                .requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers("/project/**").authenticated()
                 .requestMatchers("/board/**").permitAll()
                 .requestMatchers("/user/**").permitAll()
@@ -95,29 +98,18 @@ public class SecurityConfig {
 */
     }
 
-
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails admin = User.withUsername("admin")
-                .password("{noop}admin")
-                .authorities("ROLE_ADMIN")
-                .build();
+    public DaoAuthenticationProvider authenticationProvider(CustomUserDetailsService customUserDetailsService) {
 
-        UserDetails member = User.withUsername("member")
-                .password("{noop}member")
-                .authorities("ROLE_MEMBER")
-                .build();
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(customUserDetailsService);
 
-        UserDetails guest = User.withUsername("guest")
-                .password("{noop}guest")
-                .authorities("ROLE_GUEST")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, member, guest);
+        return authenticationProvider;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new Sha256PasswordEncoder();
+    public PasswordEncoder noOpPasswordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
     }
+
 }

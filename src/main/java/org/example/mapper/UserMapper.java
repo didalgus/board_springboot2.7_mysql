@@ -13,6 +13,9 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE id=#{userId} AND password=#{userPassword}")
     UserEntity selectUser(UserLoginRequest loginRequest);
 
+    @Select("SELECT * FROM user WHERE id=#{userId}")
+    UserEntity selectByUserId(String userId);
+
     @Insert("INSERT INTO user (id, name, password, authority) VALUES (#{userId}, #{userName}, #{userPassword}, #{userAuthority})")
     int createUser(UserJoinRequest userJoinRequest);
 
