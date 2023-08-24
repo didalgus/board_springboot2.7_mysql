@@ -40,13 +40,12 @@ class BoardRestControllerTest {
     void getBoardSeqContent() {
     }
 
-    @DisplayName("게시물 조회")
     @Test
-    void getBoardSeqTest() throws Exception {
+    void 게시물_조회() throws Exception {
 
         when(boardService.getBoardBySeq(any())).thenReturn(getBoardEntity());
 
-        mockMvc.perform(get("/board/2")
+        mockMvc.perform(get("/api/board/2")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$.seq").value(2))
@@ -54,26 +53,24 @@ class BoardRestControllerTest {
 
     }
 
-    @DisplayName("게시물 목록 조회")
     @Test
-    void getBoardListTest() throws Exception {
+    void 게시물_목록_조회() throws Exception {
         when(boardService.getBoardList(null))
                 .thenReturn(Collections.singletonList(getBoardEntity()));
 
-        mockMvc.perform(get("/board/list")
+        mockMvc.perform(get("/api/board/list")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                         .andExpect(status().isOk())
                         .andDo(print());
 
     }
 
-    @DisplayName("게시물 목록 조회 - 조건 검색")
     @Test
-    void getBoardListByTitleTest() throws Exception {
+    void 게시물_목록_조회_조건_검색() throws Exception {
         when(boardService.getBoardList("Dooly"))
                 .thenReturn(Collections.singletonList(getBoardEntity()));
 
-        mockMvc.perform(get("/board/list?title=Dooly")
+        mockMvc.perform(get("/api/board/list?title=Dooly")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -83,12 +80,12 @@ class BoardRestControllerTest {
 
     @DisplayName("게시물 등록")
     @Test
-    void regBoardTest() throws Exception {
+    void 게시물_등록() throws Exception {
         given(boardService.regBoard(any()))
                 .willReturn("OK");
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/board/reg")
+                MockMvcRequestBuilders.post("/api/board/reg")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getBoardRegRequest().toString()))
                 .andExpect(status().is2xxSuccessful())

@@ -17,7 +17,7 @@ public class WebController {
         return "/board";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/**")
     public String admin() {
         return "/admin";
     }
@@ -27,18 +27,25 @@ public class WebController {
         return "/project";
     }
 
-//    @GetMapping("/login")
-//    public String getLoignForm() {
-//        return "/login/form";
-//    }
+    @GetMapping("/login/form")
+    public String getLoignForm() {
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "logout";
+    }
+
+    @GetMapping("/error/403")
+    public String error403() {
+        return "error403";
+    }
 //
 //    @GetMapping("/join")
 //    public String getJoinForm() {
 //        return "/join/form";
 //    }
-
-
-
 
 
 }

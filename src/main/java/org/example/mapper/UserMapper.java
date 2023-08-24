@@ -7,6 +7,7 @@ import org.example.dto.UserJoinRequest;
 import org.example.dto.UserLoginRequest;
 import org.example.entity.UserEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -20,5 +21,8 @@ public interface UserMapper {
 
     @Insert("INSERT INTO user (id, name, password, authority) VALUES (#{userId}, #{userName}, #{userPassword}, #{userAuthority})")
     int createUser(UserJoinRequest userJoinRequest);
+
+    @Select("SELECT * FROM user")
+    Optional<List<UserEntity>> selectUsers() ;
 
 }

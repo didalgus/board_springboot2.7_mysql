@@ -11,22 +11,20 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
-@RequestMapping("/user")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
 public class UserRestController {
 
     private final UserService userService;
 
-        @GetMapping("/login")
+    @GetMapping("/user/login")
     public String loginUser(UserLoginRequest userLoginRequest) {
-
         UserEntity user = userService.login(userLoginRequest);
-
         return user.getPassword();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/user/create")
     public String createUser(@RequestBody @Valid UserJoinRequest userJoinRequest) {
         String result = userService.create(userJoinRequest);
         return result;

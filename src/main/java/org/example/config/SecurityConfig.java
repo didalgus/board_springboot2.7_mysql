@@ -1,10 +1,13 @@
 package org.example.config;
 
+import org.example.service.CustomLoginFailureHandler;
+import org.example.service.CustomLoginSuccessHandler;
 import org.example.service.CustomUserDetailsService;
 import org.example.service.SimplePasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
@@ -22,8 +26,7 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers("/project/**").authenticated()
-                .requestMatchers("/board/**").permitAll()
-                .requestMatchers("/user/**").permitAll()
+                .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .anyRequest().permitAll();
 
@@ -33,20 +36,27 @@ public class SecurityConfig {
                 .cacheControl().disable()
                 .xssProtection().headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK);
 
-        http.csrf().disable();      // Post 전송시 csrf 항목 추가해주지 않는경우 disable()  해줘야 함.
+        http.csrf();      // Post 전송시 csrf 항목 추가해주지 않는경우 disable()  해줘야 함. http.csrf().disable();
         // Cross Site Request Fogery: 사이트간 요청 위조
 
         http.sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true);
 
-        http.formLogin();
-//                .loginProcessingUrl("/login/process")
-//                .usernameParameter("id")
-//                .passwordParameter("pwd")
-//                .successHandler(new CustomLoginSuccessHandler());
+        http.formLogin()
+                .loginPage("/login/form")
+                .loginProcessingUrl("/login/process")
+                .usernameParameter("id")
+                .passwordParameter("pwd")
+                .successHandler(new CustomLoginSuccessHandler())
+                .failureHandler(new CustomLoginFailureHandler());
 
-        http.logout();
-//                .logoutUrl("/auth/logout")
-//                .deleteCookies("SESSION");
+        http.logout()
+                .logoutSuccessUrl("/login/form?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("SESSION");
+
+
+        http.exceptionHandling()
+                .accessDeniedPage("/error/403");
 
         return http.build();
 
@@ -97,6 +107,7 @@ public class SecurityConfig {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(customUserDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setHideUserNotFoundExceptions(false);
 
         return authenticationProvider;
     }

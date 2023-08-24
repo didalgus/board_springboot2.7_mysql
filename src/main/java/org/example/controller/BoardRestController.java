@@ -16,6 +16,7 @@ import java.util.List;
 
 @Slf4j
 @Api(tags = "Board")
+@RequestMapping("/api")
 @RestController
 @RequiredArgsConstructor
 public class BoardRestController {
