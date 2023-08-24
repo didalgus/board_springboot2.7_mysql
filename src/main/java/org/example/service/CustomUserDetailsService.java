@@ -26,6 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserEntity user = userMapper.selectByUserId(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
 
-        return new User(user.getId(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(user.getAuthority())));
+      User return_user = new User(user.getId(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(user.getAuthority())));
+
+
+//        return new User(user.getId(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(user.getAuthority())));
+        return return_user;
     }
 }
