@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.constants.EnvConstants;
 import org.example.dto.BoardRegRequest;
 import org.example.entity.BoardEntity;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +20,8 @@ class BoardServiceTest {
     @Autowired
     BoardService boardService;
 
-    @DisplayName("게시물 조회")
     @Test
-    void getBoardBySeqTest() {
+    void 게시물_조회() {
 
         BoardEntity boardEntity1 = boardService.getBoardBySeq(1L);
         BoardEntity boardEntity2 = boardService.getBoardBySeq(2L);
@@ -37,9 +36,8 @@ class BoardServiceTest {
         );
     }
 
-    @DisplayName("게시물 목록 조회")
     @Test
-    void getBoardListTest() {
+    void 게시물_목록_조회() {
 
         String title = null;
         List<BoardEntity> boardEntities = boardService.getBoardList(title);
@@ -48,9 +46,8 @@ class BoardServiceTest {
         assertTrue(boardEntities.size() > 0);
     }
 
-    @DisplayName("게시물 목록 조회- 조건")
     @Test
-    void getBoardListParamTest() {
+    void 게시물_목록_조회_조건() {
 
         String title = "title";
         List<BoardEntity> boardEntities = boardService.getBoardList(title);
@@ -65,9 +62,8 @@ class BoardServiceTest {
         assertEquals(boardEntities.size(), filterEntities.size());
     }
 
-    @DisplayName("게시물 등록")
     @Test
-    void regBoardTest() {
+    void 게시물_등록() {
 
         BoardRegRequest boardRegRequest = BoardRegRequest.builder()
                 .title("Dooly")
@@ -75,7 +71,7 @@ class BoardServiceTest {
                 .content("baby dinosaur dooly")
                 .build();
 
-        String result = boardService.regBoard(boardRegRequest);
+        var result = boardService.regBoard(boardRegRequest);
 
         log.info("result : {}", result);
         assertEquals("OK", result);

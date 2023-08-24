@@ -29,9 +29,8 @@ public class BoardValidationTest {
         factory.close();
     }
 
-    @DisplayName("빈문자열 전송 테스트")
     @Test
-    void regBoardTest() {
+    void 빈문자열_전송_테스트() {
         BoardRegRequest boardRegRequest = BoardRegRequest.builder()
                 .title("")
                 .regName("")
