@@ -23,6 +23,6 @@ public interface UserMapper {
     int createUser(UserJoinRequest userJoinRequest);
 
     @Select("SELECT * FROM user")
-    Optional<List<UserEntity>> selectUsers() ;
+    List<UserEntity> selectUsers() ;
 
 }

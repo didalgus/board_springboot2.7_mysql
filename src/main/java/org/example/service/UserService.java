@@ -36,9 +36,9 @@ public class UserService {
 
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<UserEntity> userList() {
-        return userMapper.selectUsers().orElse(null);
+        return userMapper.selectUsers();
     }
 
 }

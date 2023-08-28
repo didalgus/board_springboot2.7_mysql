@@ -1,11 +1,19 @@
 package org.example.controller;
 
+import org.example.entity.UserEntity;
+import org.example.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 public class WebController {
 
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String index() {
@@ -18,8 +26,12 @@ public class WebController {
     }
 
     @GetMapping("/admin/**")
-    public String admin() {
-        return "/admin";
+    public String admin(Model model) {
+
+        List<UserEntity> users = userService.userList();
+        model.addAttribute("users", users);
+
+        return "admin";
     }
 
     @GetMapping("/project")
