@@ -53,7 +53,12 @@ MySQL 컨테이너 접속 CLI 명령어
 ```bash
 docker exec -it mysql_5_7 bash
 ```
-참고 Url https://github.com/docker-library/docs/tree/master/mysql
+참고 Url https://github.com/docker-library/docs/tree/master/mysql  
+
+MySQL 접속 명령어   
+```bash
+bash-4.2# mysql -udemo -pdem0Passw*rd demo  
+```
 
 
 ## Logs  
