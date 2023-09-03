@@ -24,7 +24,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests()
                 //.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                //.requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers("/project/**").authenticated()
                 .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()

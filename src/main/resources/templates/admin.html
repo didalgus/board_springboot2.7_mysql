@@ -13,41 +13,34 @@
 
 </head>
 <body>
-
+<th:block th:include="fragments/heading"/>
 <div class="container">
 
-<h1>Admin Tool</h1>
+    <h1>Admin Tool</h1>
+    <b>Only administrators can come in.</b>
 
-<th:block th:include="fragments/heading"/>
-
-<b>Only administrators can come in.</b>
-
-<table id="userTable" class="table table-striped table-bordered table-hover">
-    <thead>
-    <tr>
-        <th>No.</th>
-        <th>UserID</th>
-        <th>User Name</th>
-        <th>User Password</th>
-        <th>User Authority</th>
-        <th>CreatedAt</th>
-    </tr>
-
-    </thead>
-
-    <tbody>
-        <tr th:each="user, idx: ${users}">
-            <td th:text="${idx.index}"></td>
-            <td th:text="${user.getId}"></td>
-            <td th:text="${user.getName}"></td>
-            <td th:text="${user.getPassword}"></td>
-            <td th:text="${user.getAuthority}"></td>
-            <td th:text="${user.getCreate_at}"></td>
+    <table id="userTable" class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>UserID</th>
+            <th>User Name</th>
+            <th>User Password</th>
+            <th>User Authority</th>
+            <th>CreatedAt</th>
         </tr>
-    </tbody>
-
-</table>
-
+        </thead>
+        <tbody>
+            <tr th:each="user, idx: ${users}">
+                <td th:text="${idx.index}"></td>
+                <td th:text="${user.getId}"></td>
+                <td th:text="${user.getName}"></td>
+                <td th:text="${user.getPassword}"></td>
+                <td th:text="${user.getAuthority}"></td>
+                <td th:text="${user.getCreate_at}"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
