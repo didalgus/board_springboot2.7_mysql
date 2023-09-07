@@ -12,7 +12,7 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 추후, User 가입&로그인, 게시판 File Upload 기능 추가예정입니다. (작성일 : 2023-05-29)
 
 ## Development Tools
-- Apple MacBook M1 Pro (Ventura 13.3.1)
+- Apple MacBook M1 Pro 16GB (Ventura 13.5.1)
 - IntelliJ IDEA 2023.1.2  
 
 ## Development Environment
@@ -31,12 +31,11 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 맥용 Docker Desktop 설치가 필요합니다.  
 https://docs.docker.com/desktop/install/mac-install/  
 
-소스내 `docker` 디렉토리로 이동 후 아래 명령어로 compose 구동합니다.  
--d 옵션은 background 구동합니다. 
-
+소스내 `docker` 디렉토리로 이동 후 아래 명령어로 compose 구동합니다.
 ```bash
 docker-compose up -d 
 ```
+* -d 옵션은 background 구동합니다.
 
 compose 중지는 아래 명령로 실행합니다.
 ```bash
@@ -44,7 +43,7 @@ docker-compose down
 ```
 
 docker-compose 설명   
-개발환경이 MacBook M1 인지라 docker/docker-compose.yml 설정에 아래 옵션을 추가하였습니다.  
+개발환경이 MacBook M1 인경우 docker/docker-compose.yml 설정에 아래 옵션을 추가합니다.
 ```
 platform: linux/amd64 
 ```
@@ -60,6 +59,40 @@ MySQL 접속 명령어
 bash-4.2# mysql -udemo -pdem0Passw*rd demo  
 ```
 
+## MySQL 
+
+Docker 사용이 불가한 경우 MacOS에 MySQL Server 를 설치합니다. 
+```bash
+$ brew install mysql
+```
+
+버전을 확인합니다. 
+```bash
+$ mysql --version
+mysql  Ver 8.0.33 for macos13.3 on arm64 (Homebrew)
+```
+
+서버를 구동합니다.
+```bash
+$ mysql.server start
+Starting MySQL
+. SUCCESS!
+```
+최초 설치 후 보안 설정을 합니다.
+```bash
+$ mysql_secure_installation
+```
+
+root 계정으로 로그인 후 데모계정을 생성하여 접속합니다.
+```bash
+$ mysql -u demo -h 127.0.0.1 -p'dem0Passw*rd' demo
+```
+
+서버를 종료합니다. 
+```bash
+$ mysql.server stop  
+```
+
 
 ## Logs  
 ```bash
@@ -73,7 +106,7 @@ ex)
 * $random.alphabetic(length): generates a sequence of uppercase and lowercase letters of length length (must be greater than 0). 
 * $random.alphanumeric(length): generates a sequence of uppercase and lowercase letters, digits, and underscores of length length (must be greater than 0). 
 
-sample  
+http sample  
 ```
 ### 게시판 등록
 POST /board/create HTTP/1.1
@@ -92,4 +125,42 @@ Content-Type: application/json
 - 글 조회 : GET http://localhost:8080/board/{seq}
 - 글 입력 : POST http://localhost:8080/board/create
 - 글 목록 : GET http://localhost:8080/board/list 
+
+## devtools 
+
+### build.gradle
+
+build.gradle 에 `spring-boot-devtools` 의존성 추가합니다. 
+```
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    }
+```
+### application.properties
+
+application.properties 파일에 thymeleaf 변경 내용이 바로 반영될 수 있도록 cache 를 끄는 옵션을 설정합니다. 
+```
+# thymeleaf (dev: false live: true)
+spring.thymeleaf.cache=false
+```
+
+Develtools 에는 classpath 에 있는 파일의 수정을 감지하고 자동으로 재시작하는 기능이 있습니다.   
+기능을 꺼놓고 작업했더니 class 파일을 변경할때마다 재시작해서 오히려 번거로워서 해당 옵션을 꺼두었습니다.  
+[IntelliJ Settings](#intellij-settings)설정 부분을 건너 띄시면 됩니다.  
+```
+# devtools
+spring.devtools.restart.enabled=false
+```
+### IntelliJ IDEA 
+![IntelliJ IDEA](src/main/resources/static/image/IntelliJ-version.png)
+
+IntelliJ IDEA 2023.2 버전 기준입니다.   
+
+#### IntelliJ Settings  
+* Settings > Build, Execution, Deployment > Compiler > [v] Build project automatically
+* Advanced Settings > [v] Allow auto-make to start even if developed application is currently running 
+
+#### IntelliJ Run/Debug Options
+* Run/Debug Configurations > Modify options > On 'Update' action: Update class and resources 
+* Run/Debug Configurations > Modify options > On frame deactivation: Update resources 
 

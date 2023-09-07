@@ -42,7 +42,7 @@ public class SecurityConfig {
         http.sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true);
 
         http.formLogin()
-                .loginPage("/login/form")
+                .loginPage("/sign-in")
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("id")
                 .passwordParameter("pwd")
@@ -50,7 +50,7 @@ public class SecurityConfig {
                 .failureHandler(new CustomLoginFailureHandler());
 
         http.logout()
-                .logoutSuccessUrl("/login/form?logout")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("SESSION");
 

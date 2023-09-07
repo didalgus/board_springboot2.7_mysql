@@ -30,8 +30,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a href="/#"><span sec:authentication="principal.username"/> 님</span></a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/#"><span sec:authentication="principal.authorities"/></a></li>
-                <li sec:authorize="isAuthenticated()" class="active"><a href="/logout">Logout</a></li>
-                <li sec:authorize="!isAuthenticated()"><a href="/login/form">Login</a></li>
+                <li sec:authorize="isAuthenticated()" class="active"><a href="/sign-out">Logout</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/sign-in">Login</a></li>
 
             </ul>
         </div><!--/.nav-collapse -->

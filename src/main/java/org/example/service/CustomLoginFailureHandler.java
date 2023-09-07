@@ -24,6 +24,6 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
         session.setAttribute("invalidUsername", isInvalidUsername);
         session.setAttribute("invalidPassword", isInvalidPassword);
 
-        response.sendRedirect("/login/form?error");
+        response.sendRedirect("/sign-in?error");
     }
 }
