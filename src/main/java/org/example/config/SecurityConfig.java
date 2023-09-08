@@ -23,9 +23,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests()
-                //.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                //.requestMatchers("/board/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                .requestMatchers("/project/**").authenticated()
+                .requestMatchers("/users/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/board/form/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .requestMatchers("/board/form/**").authenticated()
                 .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .anyRequest().permitAll();

@@ -21,8 +21,8 @@ public class WebController {
     private BoardService boardService;
 
     @GetMapping("/")
-    public String index() {
-        return "/index";
+    public String main() {
+        return "/main";
     }
 
     @GetMapping("/board")
@@ -37,16 +37,11 @@ public class WebController {
         return "boardForm";
     }
 
-    @GetMapping("/admin/**")
-    public String admin(Model model) {
+    @GetMapping("/users")
+    public String users(Model model) {
         List<UserEntity> users = userService.userList();
         model.addAttribute("users", users);
-        return "admin";
-    }
-
-    @GetMapping("/project")
-    public String project() {
-        return "/project";
+        return "user";
     }
 
     @GetMapping("/sign-in")
@@ -55,19 +50,18 @@ public class WebController {
     }
 
     @GetMapping("/sign-out")
-    public String logout() {
+    public String signOut() {
         return "sign-out";
+    }
+
+    @GetMapping("/sign-up")
+    public String signUp() {
+        return "/sign-up";
     }
 
     @GetMapping("/error/403")
     public String error403() {
         return "error403";
     }
-
-    @GetMapping("/sign-up")
-    public String getJoinForm() {
-        return "/sign-up";
-    }
-
 
 }

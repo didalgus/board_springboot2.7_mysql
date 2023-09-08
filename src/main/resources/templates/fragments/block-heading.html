@@ -6,7 +6,6 @@
 <head>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-3.4.1.min.css}">
-
 </head>
 <body>
 <!-- Static navbar navbar-static-top navbar-fixed-top -->
@@ -28,11 +27,9 @@
                 <li><a href="/board/">Board</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li sec:authorize="isAuthenticated()"><a href="/#"><span sec:authentication="principal.username"/> 님</span></a></li>
-                <li sec:authorize="isAuthenticated()"><a href="/#"><span sec:authentication="principal.authorities"/></a></li>
-                <li sec:authorize="isAuthenticated()" class="active"><a href="/sign-out">Logout</a></li>
-                <li sec:authorize="!isAuthenticated()"><a href="/sign-in">Login</a></li>
-
+                <li sec:authorize="isAuthenticated()"><a href="/#"><span sec:authentication="principal.username"/> 님</span>  <span sec:authentication="principal.authorities"/></a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/sign-out">Sign-out</a></li>
+                <li sec:authorize="!isAuthenticated()" class="active"><a href="/sign-in">Sign-in</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

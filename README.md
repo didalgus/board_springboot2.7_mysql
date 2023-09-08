@@ -25,6 +25,9 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 - SpringBoot 2.7.13 (SpringFramework 5.3.27)
 - Swagger3 (http://localhost:8080/swagger-ui/index.html)
 - MyBatis 3.5.7
+- SpringBoot Devtools 2.7.0
+- thymeleaf 3.0.15
+- thymeleaf layout dialect 3.2.1
 
 # Docker 
 
@@ -128,6 +131,9 @@ Content-Type: application/json
 
 ## devtools 
 
+thymeleaf 사용하여 화면구성하였습니다. 
+html 수정한 경우 브라우저만 새로고침하여 수정된 내용을 확인하기 위해 `spring-boot-devtools` 설정하였습니다. 
+
 ### build.gradle
 
 build.gradle 에 `spring-boot-devtools` 의존성 추가합니다. 
@@ -145,13 +151,16 @@ spring.thymeleaf.cache=false
 ```
 
 Develtools 에는 classpath 에 있는 파일의 수정을 감지하고 자동으로 재시작하는 기능이 있습니다.   
-기능을 꺼놓고 작업했더니 class 파일을 변경할때마다 재시작해서 오히려 번거로워서 해당 옵션을 꺼두었습니다.  
-[IntelliJ Settings](#intellij-settings)설정 부분을 건너 띄시면 됩니다.  
+`Update class and resources` 로 설정하고 작업했더니 class 파일을 변경 할 때마다 재시작해서 `Update resources` 로 설정하였습니다.  
+[IntelliJ Run/Debug Options](#intellij-run/debug-options)설정 부분입니다. 
+
 ```
 # devtools
 spring.devtools.restart.enabled=false
 ```
+
 ### IntelliJ IDEA 
+
 ![IntelliJ IDEA](src/main/resources/static/image/IntelliJ-version.png)
 
 IntelliJ IDEA 2023.2 버전 기준입니다.   
@@ -161,6 +170,6 @@ IntelliJ IDEA 2023.2 버전 기준입니다.
 * Advanced Settings > [v] Allow auto-make to start even if developed application is currently running 
 
 #### IntelliJ Run/Debug Options
-* Run/Debug Configurations > Modify options > On 'Update' action: Update class and resources 
+* Run/Debug Configurations > Modify options > On 'Update' action: Update resources 
 * Run/Debug Configurations > Modify options > On frame deactivation: Update resources 
 
