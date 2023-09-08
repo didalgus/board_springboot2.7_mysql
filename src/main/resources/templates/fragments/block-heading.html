@@ -28,7 +28,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a href="/#"><span sec:authentication="principal.username"/> 님</span>  <span sec:authentication="principal.authorities"/></a></li>
-                <li sec:authorize="isAuthenticated()"><a href="/sign-out">Sign-out</a></li>
+                <li sec:authorize="isAuthenticated()" class="active"><a href="/sign-out">Sign-out</a></li>
                 <li sec:authorize="!isAuthenticated()" class="active"><a href="/sign-in">Sign-in</a></li>
             </ul>
         </div><!--/.nav-collapse -->

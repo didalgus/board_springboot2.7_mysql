@@ -97,7 +97,7 @@ class BoardRestControllerTest {
     private BoardRegRequest getBoardRegRequest() {
         return BoardRegRequest.builder()
                 .title("Dooly")
-                .regName("Go Gil-dong")
+                .userId("Go-Gil-dong")
                 .content("baby dinosaur dooly")
                 .build();
     }
@@ -105,7 +105,7 @@ class BoardRestControllerTest {
     private BoardEntity getBoardEntity() {
         return BoardEntity.builder()
                 .seq(2L)
-                .regName("Go gil-dong")
+                .userId("Go-gil-dong")
                 .title("Dooly")
                 .content("baby dinosaur dooly")
                 .regType(RegType.User)

@@ -14,7 +14,7 @@ public interface BoardMapper {
     @Select("SELECT seq, title, content, reg_name, reg_dt FROM board WHERE seq = #{seq}")
     BoardEntity selectBoardBySeq(Long seq);
 
-    @Insert("INSERT INTO board (title, content, reg_name) VALUES (#{title}, #{content}, #{regName})")
+    @Insert("INSERT INTO board (title, content, user_id) VALUES (#{title}, #{content}, #{userId})")
     int insertBoard(BoardRegRequest boardRegRequest);
 
     @Select({"<script>",

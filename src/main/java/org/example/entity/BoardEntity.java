@@ -16,7 +16,7 @@ public class BoardEntity {
     private String title;
     private String content;
     private RegType regType;
-    private String regName;
+    private String userId;
     private LocalDateTime regDt;
 
 }
