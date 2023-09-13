@@ -22,9 +22,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/users/">Users</a></li>
-                <li><a href="/board/">Board</a></li>
+                <li th:class="${#httpServletRequest.requestURI == '/' ? 'active' : ''}"><a th:href="@{/}">Home</a></li>
+                <li th:class="${#httpServletRequest.requestURI == '/users' ? 'active' : ''}"><a th:href="@{/users}">Users</a></li>
+                <li th:class="${#httpServletRequest.requestURI == '/board' ? 'active' : ''}"><a th:href="@{/board}">Board</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a href="/#"><span sec:authentication="principal.username"/> 님</span>  <span sec:authentication="principal.authorities"/></a></li>

@@ -120,7 +120,7 @@ Content-Type: application/json
   "title" : "title{{$randomInt}}",
   "content" : "{{$random.alphanumeric(10)}}",
   "regType" : "User",
-  "regName" : "name{{$random.alphabetic(3)}}"
+  "userId" : "name{{$random.alphabetic(3)}}"
 }
 ```
 

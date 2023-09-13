@@ -11,14 +11,14 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    @Select("SELECT seq, title, content, reg_name, reg_dt FROM board WHERE seq = #{seq}")
+    @Select("SELECT seq, title, content, user_id, reg_dt FROM board WHERE seq = #{seq}")
     BoardEntity selectBoardBySeq(Long seq);
 
     @Insert("INSERT INTO board (title, content, user_id) VALUES (#{title}, #{content}, #{userId})")
     int insertBoard(BoardRegRequest boardRegRequest);
 
     @Select({"<script>",
-            "SELECT seq, title, content, reg_type, reg_name, reg_dt FROM board",
+            "SELECT seq, title, content, reg_type, user_id, reg_dt FROM board",
             "<where>",
             "<if test='title != null'> title LIKE CONCAT('%', #{title}, '%')</if>",
             "</where>",

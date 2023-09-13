@@ -19,9 +19,7 @@
 </head>
 <body>
 <th:block th:include="fragments/block-heading"/>
-
 <div class="container">
-
     <h1>Board Write</h1>
 
     <form id="boardForm">
@@ -56,13 +54,10 @@
 </html>
 
 <script>
-
-
     // 폼이 제출되면 이벤트 핸들러 실행
     $('#boardForm').submit(function (event) {
         // 폼의 기본 제출 동작을 막습니다.
         event.preventDefault();
-
 
         alert('submit');
         // 폼 데이터를 직렬화합니다.
@@ -76,7 +71,6 @@
         };
 
         var jsonData = JSON.stringify(formData);
-
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -102,6 +96,4 @@
             }
         });
     });
-
-
 </script>

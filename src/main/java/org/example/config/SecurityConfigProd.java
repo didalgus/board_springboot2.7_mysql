@@ -6,6 +6,7 @@ import org.example.service.CustomUserDetailsService;
 import org.example.service.SimplePasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,10 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 
+@Profile("prod")
 @Configuration
 @EnableWebSecurity(debug = false)
 @EnableMethodSecurity
-public class SecurityConfig {
+public class SecurityConfigProd {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,7 +39,6 @@ public class SecurityConfig {
                 .xssProtection().headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK);
 
         http.csrf();      // Post 전송시 csrf 항목 추가해주지 않는경우 disable()  해줘야 함. http.csrf().disable();
-        // Cross Site Request Fogery: 사이트간 요청 위조
 
         http.sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true);
 
@@ -59,46 +60,6 @@ public class SecurityConfig {
                 .accessDeniedPage("/error/403");
 
         return http.build();
-
-/*
-        return http
-            .authorizeHttpRequests()
-                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers("/private-project/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MEMBER")
-                .requestMatchers("/project/**").authenticated()
-                .anyRequest().permitAll()
-                .and()
-            .requiresChannel()
-                .requestMatchers("/admin/**").requiresSecure()
-                .requestMatchers("/private-project/**").requiresSecure()
-                .requestMatchers("/project/**").requiresSecure()
-                .anyRequest().requiresInsecure()
-                .and()
-            .formLogin()
-                .and()
-            .logout()
-                .and()
-            .headers()
-                .defaultsDisabled()
-                .cacheControl()
-                    .and()
-                .contentTypeOptions()
-                    .and()
-                .xssProtection()
-                    .headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
-                    .and()
-                .frameOptions()
-                    .sameOrigin()
-                .and()
-            .csrf()
-                .disable()
-            .sessionManagement()
-                .maximumSessions(1)
-                    .maxSessionsPreventsLogin(true)
-                    .and()
-                .and()
-            .build();
-*/
     }
 
     @Bean
@@ -112,10 +73,8 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new SimplePasswordEncoder();
     }
-
 }

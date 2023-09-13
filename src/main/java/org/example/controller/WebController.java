@@ -28,7 +28,7 @@ public class WebController {
     @GetMapping("/board")
     public String board(Model model) {
         List<BoardEntity> list = boardService.getBoardList(null);
-        model.addAttribute("list", list);
+        model.addAttribute("lists", list);
         return "/board";
     }
 
