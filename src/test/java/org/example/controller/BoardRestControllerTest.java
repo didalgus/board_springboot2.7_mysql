@@ -77,7 +77,6 @@ class BoardRestControllerTest {
 
     }
 
-
     @DisplayName("게시물 등록")
     @Test
     void 게시물_등록() throws Exception {
@@ -85,7 +84,7 @@ class BoardRestControllerTest {
                 .willReturn("OK");
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/api/board/reg")
+                MockMvcRequestBuilders.post("/api/board/write")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getBoardRegRequest().toString()))
                 .andExpect(status().is2xxSuccessful())
@@ -93,11 +92,10 @@ class BoardRestControllerTest {
 
     }
 
-
     private BoardRegRequest getBoardRegRequest() {
         return BoardRegRequest.builder()
                 .title("Dooly")
-                .userId("Go-Gil-dong")
+                .regName("Go-Gil-dong")
                 .content("baby dinosaur dooly")
                 .build();
     }
@@ -105,7 +103,7 @@ class BoardRestControllerTest {
     private BoardEntity getBoardEntity() {
         return BoardEntity.builder()
                 .seq(2L)
-                .userId("Go-gil-dong")
+                .regName("Go-gil-dong")
                 .title("Dooly")
                 .content("baby dinosaur dooly")
                 .regType(RegType.User)

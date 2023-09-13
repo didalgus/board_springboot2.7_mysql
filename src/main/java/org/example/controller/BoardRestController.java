@@ -25,19 +25,19 @@ public class BoardRestController {
 
     @ApiOperation("게시물 조회")
     @GetMapping("/board/{boardSeq}")
-    public BoardResponse getBoardBySeq(@PathVariable @Valid @NotNull Long boardSeq) {
+    public BoardResponse view(@PathVariable @Valid @NotNull Long boardSeq) {
         return BoardResponse.of(boardService.getBoardBySeq(boardSeq));
     }
 
     @ApiOperation("게시물 등록")
-    @PostMapping("/board/create")
-    public String regBoard(@RequestBody @Valid BoardRegRequest boardRegRequest) {
+    @PostMapping("/board/write")
+    public String write(@RequestBody @Valid BoardRegRequest boardRegRequest) {
         return boardService.regBoard(boardRegRequest);
     }
 
     @ApiOperation("게시물 목록 조회")
     @GetMapping("/board/list")
-    public List<BoardResponse> getBoardList(@RequestParam(value = "title", required = false) String title) {
+    public List<BoardResponse> list(@RequestParam(value = "title", required = false) String title) {
         return BoardResponse.listOf(boardService.getBoardList(title));
     }
 

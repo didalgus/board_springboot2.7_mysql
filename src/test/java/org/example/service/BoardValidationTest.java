@@ -33,7 +33,7 @@ public class BoardValidationTest {
     void 빈문자열_전송_테스트() {
         BoardRegRequest boardRegRequest = BoardRegRequest.builder()
                 .title("")
-                .userId("")
+                .regName("")
                 .content("baby dinosaur dooly")
                 .build();
 

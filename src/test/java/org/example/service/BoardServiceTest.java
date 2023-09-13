@@ -31,8 +31,8 @@ class BoardServiceTest {
         log.info("boardEntity2.getRegDt() : {}", boardEntity2.getRegDt().format(EnvConstants.FORMATTER));
 
         assertAll(
-                () -> assertEquals("title1", boardEntity1.getTitle()),
-                () -> assertEquals("content2", boardEntity2.getContent())
+                () -> assertEquals("YOTSUBA&!", boardEntity1.getTitle()),
+                () -> assertEquals("Ongaku mo Itsumo Hare Nochi Guu: Jungle wa Itsumo Hare Nochi Guu Original Soundtrack.", boardEntity2.getContent())
         );
     }
 
@@ -67,7 +67,7 @@ class BoardServiceTest {
 
         BoardRegRequest boardRegRequest = BoardRegRequest.builder()
                 .title("Dooly")
-                .userId("Go-Gil-dong")
+                .regName("Go-Gil-dong")
                 .content("baby dinosaur dooly")
                 .build();
 

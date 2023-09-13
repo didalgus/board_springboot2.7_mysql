@@ -10,7 +10,6 @@
 <th:block th:include="fragments/block-heading" />
 <div class="container">
     <h1>Board</h1>
-    <b>Guests can not come in.</b>
 
     <table id="userTable" class="table table-striped table-bordered table-hover">
         <thead>
@@ -30,7 +29,7 @@
             <td th:text="${list.seq}"></td>
             <td th:text="${list.title}"></td>
             <td th:text="${list.regType}"></td>
-            <td th:text="${list.userId}"></td>
+            <td th:text="${list.regName}"></td>
             <td th:text="${list.regDt}"></td>
         </tr>
         </tbody>

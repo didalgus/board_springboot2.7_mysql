@@ -4,7 +4,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 ### 게시판 등록
-POST /api/board/create HTTP/1.1
+POST /api/board/write HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 
@@ -12,17 +12,5 @@ Content-Type: application/json
   "title" : "title{{$randomInt}}",
   "content" : "{{$random.alphanumeric(10)}}",
   "regType" : "User",
-  "userId" : "id{{$randomInt}}"
-}
-
-### 사용자 등록
-POST /api/user/create HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-
-{
-  "userId" : "id{{$randomInt}}",
-  "userName" : "name{{$random.alphabetic(3)}}",
-  "userPassword" : "1234",
-  "userAuthority": "ROLE_ADMIN"
+  "regName" : "name{{$randomInt}}"
 }
