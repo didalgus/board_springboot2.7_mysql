@@ -11,6 +11,15 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 
 추후, User 가입&로그인, 게시판 File Upload 기능 추가예정입니다. (작성일 : 2023-05-29)
 
+## APIs 
+
+| URI               | Method | DESC | URL                                   |
+|-------------------|--------|------|---------------------------------------|
+| /                 | GET    | 메인   | http://localhost:8080/                |  
+| /api/board/list   | GET    | 게시물 리스트| http://localhost:8080/api/board/list  |
+| /api/board/write  | POST   | 게시물 작성 | http://localhost:8080/api/board/write |
+| /api/board/{seq}  | GET    | 게시물 조회 | http://localhost:8080/api/board/1     |
+
 ## Development Tools
 - Apple MacBook M1 Pro 16GB (Ventura 13.5.1)
 - IntelliJ IDEA 2023.1.2  
@@ -27,10 +36,8 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 - MyBatis 3.5.7
 - SpringBoot Devtools 2.7.0
 - thymeleaf 3.0.15
-- thymeleaf layout dialect 3.2.1
 
-# Docker 
-
+# Docker
 맥용 Docker Desktop 설치가 필요합니다.  
 https://docs.docker.com/desktop/install/mac-install/  
 
@@ -96,7 +103,6 @@ $ mysql -u demo -h 127.0.0.1 -p'dem0Passw*rd' demo
 $ mysql.server stop  
 ```
 
-
 ## Logs  
 ```bash
 $ tail -f ~/logs/spring.log
@@ -124,18 +130,12 @@ Content-Type: application/json
 }
 ```
 
-## APIs 
-- 글 조회 : GET http://localhost:8080/board/{seq}
-- 글 입력 : POST http://localhost:8080/board/create
-- 글 목록 : GET http://localhost:8080/board/list 
 
-## devtools 
-
+## devtools
 thymeleaf 사용하여 화면구성하였습니다. 
 html 수정한 경우 브라우저만 새로고침하여 수정된 내용을 확인하기 위해 `spring-boot-devtools` 설정하였습니다. 
 
 ### build.gradle
-
 build.gradle 에 `spring-boot-devtools` 의존성 추가합니다. 
 ```
 dependencies {
@@ -143,7 +143,6 @@ dependencies {
     }
 ```
 ### application.properties
-
 application.properties 파일에 thymeleaf 변경 내용이 바로 반영될 수 있도록 cache 를 끄는 옵션을 설정합니다. 
 ```
 # thymeleaf (dev: false live: true)
