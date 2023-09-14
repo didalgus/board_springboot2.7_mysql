@@ -23,8 +23,8 @@ class BoardServiceTest {
     @Test
     void 게시물_조회() {
 
-        BoardEntity boardEntity1 = boardService.getBoardBySeq(1L);
-        BoardEntity boardEntity2 = boardService.getBoardBySeq(2L);
+        BoardEntity boardEntity1 = boardService.findBySeq(1L);
+        BoardEntity boardEntity2 = boardService.findBySeq(2L);
 
         log.info("boardEntity1.getTitle() : {}", boardEntity1.getTitle());
         log.info("boardEntity2.getContent() : {}", boardEntity2.getContent());
@@ -40,7 +40,7 @@ class BoardServiceTest {
     void 게시물_목록_조회() {
 
         String title = null;
-        List<BoardEntity> boardEntities = boardService.getBoardList(title);
+        List<BoardEntity> boardEntities = boardService.findByTitle(title);
 
         log.info("list count :  {}", boardEntities.size());
         assertTrue(boardEntities.size() > 0);
@@ -50,7 +50,7 @@ class BoardServiceTest {
     void 게시물_목록_조회_조건() {
 
         String title = "title";
-        List<BoardEntity> boardEntities = boardService.getBoardList(title);
+        List<BoardEntity> boardEntities = boardService.findByTitle(title);
 
         log.info("list count :  {}", boardEntities.size());
         assertTrue(boardEntities.size() > 0);
@@ -71,7 +71,7 @@ class BoardServiceTest {
                 .content("baby dinosaur dooly")
                 .build();
 
-        var result = boardService.regBoard(boardRegRequest);
+        var result = boardService.save(boardRegRequest);
 
         log.info("result : {}", result);
         assertEquals("OK", result);

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.example.constants.EnvConstants;
 import org.example.entity.BoardEntity;
 import org.example.enums.RegType;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +55,7 @@ public class BoardResponse {
                 .content(boardEntity.getContent())
                 .regType(boardEntity.getRegType())
                 .regName(boardEntity.getRegName())
-                .regDt(boardEntity.getRegDt().format(EnvConstants.FORMATTER))
+                .regDt(boardEntity.getRegDt().toLocalDateTime().format(EnvConstants.FORMATTER_YMD))
                 .build();
     }
 }

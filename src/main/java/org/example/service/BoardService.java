@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.dto.BoardEditRequest;
 import org.example.dto.BoardRegRequest;
 import org.example.entity.BoardEntity;
 import org.example.mapper.BoardMapper;
@@ -16,15 +17,23 @@ public class BoardService {
     private BoardMapper boardMapper;
 
     @Cacheable(cacheNames = "board", key = "#seq")
-    public BoardEntity getBoardBySeq(Long seq) {
-        return boardMapper.selectBoardBySeq(seq);
+    public BoardEntity findBySeq(Long seq) {
+        return boardMapper.findBySeq(seq);
     }
 
-    public String regBoard(BoardRegRequest boardRegRequest) {
-        return (boardMapper.insertBoard(boardRegRequest) == 1) ? "OK" : "Fail";
+    public List<BoardEntity> findByTitle(String title) {
+        return boardMapper.findByTitle(title);
     }
 
-    public List<BoardEntity> getBoardList(String title) {
-        return boardMapper.selectBoardList(title);
+    public String save(BoardRegRequest boardRegRequest) {
+        return (boardMapper.save(boardRegRequest) == 1) ? "OK" : "Fail";
+    }
+
+    public int update(BoardEditRequest board) {
+        return boardMapper.update(board);
+    }
+
+    public int delete(Long boardSeq) {
+        return boardMapper.delete(boardSeq);
     }
 }

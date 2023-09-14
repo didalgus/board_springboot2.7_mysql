@@ -1,8 +1,6 @@
 package org.example.controller;
 
-import org.example.constants.EnvConstants;
 import org.example.dto.BoardRegRequest;
-import org.example.dto.BoardResponse;
 import org.example.entity.BoardEntity;
 import org.example.enums.RegType;
 import org.example.service.BoardService;
@@ -17,7 +15,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -43,7 +40,7 @@ class BoardRestControllerTest {
     @Test
     void 게시물_조회() throws Exception {
 
-        when(boardService.getBoardBySeq(any())).thenReturn(getBoardEntity());
+        when(boardService.findBySeq(any())).thenReturn(getBoardEntity());
 
         mockMvc.perform(get("/api/board/2")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -55,7 +52,7 @@ class BoardRestControllerTest {
 
     @Test
     void 게시물_목록_조회() throws Exception {
-        when(boardService.getBoardList(null))
+        when(boardService.findByTitle(null))
                 .thenReturn(Collections.singletonList(getBoardEntity()));
 
         mockMvc.perform(get("/api/board/list")
@@ -67,7 +64,7 @@ class BoardRestControllerTest {
 
     @Test
     void 게시물_목록_조회_조건_검색() throws Exception {
-        when(boardService.getBoardList("Dooly"))
+        when(boardService.findByTitle("Dooly"))
                 .thenReturn(Collections.singletonList(getBoardEntity()));
 
         mockMvc.perform(get("/api/board/list?title=Dooly")
@@ -80,7 +77,7 @@ class BoardRestControllerTest {
     @DisplayName("게시물 등록")
     @Test
     void 게시물_등록() throws Exception {
-        given(boardService.regBoard(any()))
+        given(boardService.save(any()))
                 .willReturn("OK");
 
         mockMvc.perform(

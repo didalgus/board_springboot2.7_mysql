@@ -2,12 +2,17 @@ package org.example.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
-import org.example.enums.RegType;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
-@Builder
-public class BoardRegRequest {
+
+@Setter
+@Getter
+public class BoardEditRequest {
+
+    private long seq;
 
     @ApiModelProperty("제목")
     @NotEmpty(message = "Please enter a title")
@@ -17,11 +22,7 @@ public class BoardRegRequest {
     @NotEmpty(message = "Please enter your content")
     private String content;
 
-    @ApiModelProperty("글 분류 : 사용자(User), Kafka(Kafka)")
-    private RegType regType;
-
     @ApiModelProperty("작성자")
     @NotEmpty(message = "Please enter your name")
     private String regName;
-
 }

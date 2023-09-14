@@ -17,20 +17,20 @@
 <div class="container">
     <h1>Board Write</h1>
 
-    <form id="boardForm">
-
+    <form id="boardForm" th:object="${board}">
+        <input type="hidden" th:field="*{seq}">
         <table class="table table-bordered table-hover">
             <tr>
                 <td>작성자</td>
-                <td><input name="name" class="form-control"></td>
+                <td><input th:field="*{regName}" class="form-control"></td>
             </tr>
             <tr>
                 <td>제목</td>
-                <td><input name="title" class="form-control"></td>
+                <td><input th:field="*{title}" class="form-control"></td>
             </tr>
             <tr>
                 <td>내용</td>
-                <td><textarea name="content" class="form-control" rows="3"></textarea></td>
+                <td><textarea th:field="*{content}" class="form-control" rows="3"></textarea></td>
             </tr>
         </table>
         <div>
@@ -53,8 +53,18 @@
         //var formData = $(this).serialize();
         //var params = JSON.stringify($("#boardForm").serializeObject());
 
+        var boardSeq = $('input[name="seq"]').val();
+
+        var url = '/api/board/write';
+        var type = 'POST';
+
+        if(boardSeq > 0) {
+            url = '/api/board/'+boardSeq;
+            type = 'PUT';
+        }
+
         var formData = {
-            name: $('input[name="name"]').val(),
+            regName: $('input[name="regName"]').val(),
             title: $('input[name="title"]').val(),
             content: $('textarea[name="content"]').val()
         };
@@ -64,8 +74,8 @@
 
         // AJAX 요청을 보냅니다.
         $.ajax({
-            type: 'POST',         // HTTP 요청 방식 (POST)
-            url: '/api/board/create', // 서버 URL (폼이 전송될 곳)
+            type: type,         // HTTP 요청 방식 (POST)
+            url: url, // 서버 URL (폼이 전송될 곳)
             contentType: 'application/json',
             dataType: 'json',
             data: jsonData,       // 폼 데이터

@@ -27,7 +27,7 @@
         </tr>
         <tr th:unless="${#lists.size(lists) == 0}" th:each="list: ${lists}">
             <td th:text="${list.seq}"></td>
-            <td th:text="${list.title}"></td>
+            <td><a th:href="@{/board/}+${list.seq}" th:text="${list.title}">제목</a></td>
             <td th:text="${list.regType}"></td>
             <td th:text="${list.regName}"></td>
             <td th:text="${list.regDt}"></td>

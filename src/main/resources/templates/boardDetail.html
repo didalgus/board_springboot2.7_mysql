@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Board</title>
+    <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />-->
+    <!--   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />-->
+</head>
+<body>
+<th:block th:include="fragments/block-heading"/>
+<div class="container">
+    <h1>Board</h1>
+
+    <div class="tblWrap" th:object="${board}">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td>작성자</td>
+                <td th:text="*{regName}">홍길동</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td th:text="*{title}">제목</td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td th:text="*{content}">내용</td>
+            </tr>
+            <tr>
+                <td>작성일</td>
+                <td th:text="*{#dates.format(regDt,'yyyy-MM-dd HH:mm')}">2023-09-14 23:10</td>
+            </tr>
+        </table>
+        <div>
+            <a th:href="@{/board/form?seq=}+*{seq}" class="btn_tbl_Type">수정</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>

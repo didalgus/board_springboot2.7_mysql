@@ -3,6 +3,7 @@ package org.example.entity;
 import lombok.*;
 import org.example.enums.RegType;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,6 +18,6 @@ public class BoardEntity {
     private String content;
     private RegType regType;
     private String regName;
-    private LocalDateTime regDt;
+    private Timestamp regDt;
 
 }

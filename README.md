@@ -1,8 +1,8 @@
 # Board
 
 email address : didalgus@gmail.com  
-repository : https://github.com/didalgus/board_springboot2.7_mysql
-blog address : https://didalgus.github.io/
+repository : https://github.com/didalgus/board_springboot2.7_mysql  
+blog address : https://didalgus.github.io/  
 
 ## Introduction
 Board REST Service  
@@ -151,7 +151,7 @@ spring.thymeleaf.cache=false
 
 Develtools 에는 classpath 에 있는 파일의 수정을 감지하고 자동으로 재시작하는 기능이 있습니다.   
 `Update class and resources` 로 설정하고 작업했더니 class 파일을 변경 할 때마다 재시작해서 `Update resources` 로 설정하였습니다.  
-[IntelliJ Run/Debug Options](#intellij-run/debug-options)설정 부분입니다. 
+[IntelliJ Run/Debug Options](#intellij-run/debug-options) 설정 부분입니다. 
 
 ```
 # devtools
