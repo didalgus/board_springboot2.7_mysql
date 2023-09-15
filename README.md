@@ -35,7 +35,7 @@ API 목록은 [Swagger](http://localhost:8080/swagger-ui/index.html) 에서 확�
 - Swagger3 (http://localhost:8080/swagger-ui/index.html)
 - MyBatis 3.5.7
 - SpringBoot Devtools 2.7.0
-- thymeleaf 3.0.15
+- [thymeleaf 3.0.15](https://www.thymeleaf.org/doc/articles/standardurlsyntax.html)
 
 # Docker
 맥용 Docker Desktop 설치가 필요합니다.  
@@ -172,3 +172,7 @@ IntelliJ IDEA 2023.2 버전 기준입니다.
 * Run/Debug Configurations > Modify options > On 'Update' action: Update resources 
 * Run/Debug Configurations > Modify options > On frame deactivation: Update resources 
 
+## Bootstrap  
+  
+Bootstrap 3.4 로 화면 구성하였습니다.   
+[https://getbootstrap.com/docs/3.4/components/](https://getbootstrap.com/docs/3.4/components/)

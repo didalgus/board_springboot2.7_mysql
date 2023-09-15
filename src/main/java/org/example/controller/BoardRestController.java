@@ -41,7 +41,7 @@ public class BoardRestController {
 
     @ApiOperation("게시물 등록")
     @PostMapping("/board/write")
-    @ResponseStatus(value = HttpStatus.CREATED)
+    @ResponseStatus(value = HttpStatus.OK)
     public void write(@RequestBody @Valid BoardRegRequest boardRegRequest) {
         boardService.save(boardRegRequest);         // Sample - @ResponseStatus
     }
