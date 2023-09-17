@@ -118,7 +118,7 @@ ex)
 http sample  
 ```
 ### 게시판 등록
-POST /board/create HTTP/1.1
+POST /board/write HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 
@@ -126,7 +126,7 @@ Content-Type: application/json
   "title" : "title{{$randomInt}}",
   "content" : "{{$random.alphanumeric(10)}}",
   "regType" : "User",
-  "userId" : "name{{$random.alphabetic(3)}}"
+  "regName" : "name{{$random.alphabetic(3)}}"
 }
 ```
 
